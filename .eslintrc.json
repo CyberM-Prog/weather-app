@@ -8,6 +8,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "import/prefer-default-export": "off"
     },
     "extends": [
         "airbnb-base",
