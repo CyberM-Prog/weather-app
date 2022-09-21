@@ -176,3 +176,22 @@ export function switchToDailyForecast() {
 
     dailyDivs.forEach((div) => div.classList.remove("hide"));
 }
+
+export function changeTextContent(text) {
+    this.textContent = text
+}
+
+const currentIcon = document.querySelector(".currenticon")
+
+export function changeCurrentWeatherIcon(code) {
+    if (code === "01d") currentIcon.src = "../src/Images/sun.svg"
+    else if (code === "01n") currentIcon.src = "../src/Images/moon.svg"
+    else if (code === "02d") currentIcon.src = "../src/Images/cloud-sun.svg"
+    else if (code === "02n") currentIcon.src = "../src/Images/cloud-moon.svg"
+    else if (code === "03d" || code === "03n") currentIcon.src = "../src/Images/cloud (copy).svg"
+    else if (code === "04d" || code === "04n") currentIcon.src = "../src/Images/clouds.svg"
+    else if (code === "09d" || code === "09n" || code === "10d" || code === "10n") currentIcon.src = "../src/Images/cloud-rain (1).svg"
+    else if (code === "11d" || code === "11n") currentIcon.src = "../src/Images/cloud-lightning (2).svg"
+    else if (code === "13d" || code === "13n") currentIcon.src = "../src/Images/snow.svg"
+    else if (code === "50d" || code === "50n") currentIcon.src = "../src/Images/cloud-fog.svg"
+}
