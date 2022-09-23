@@ -1,1 +1,222 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Document</title><script defer="defer" src="main.js"></script></head><body><div id="container"><div class="top"><div class="feelslike topdiv"><img src="../src/Images/thermometer-half.svg" alt="" class="topicons"/><div class="topwrap"><p>Feels Like</p><p class="topcontent feelslikecontent">32 ºC</p></div></div><div class="maxtemperature topdiv"><img src="../src/Images/thermometer-sun.svg" alt="" class="topicons"/><div class="topwrap"><p>Maximum</p><p class="topcontent maxcontent">37 ºC</p></div></div><div class="mintemperature topdiv"><img src="../src/Images/thermometer-snow.svg" alt="" class="topicons"/><div class="topwrap"><p>Minimum</p><p class="topcontent mincontent">29 ºC</p></div></div><div class="pop topdiv"><img src="../src/Images/umbrella.svg" alt="" class="topicons"/><div class="topwrap"><p>Chance Of Rain</p><p class="topcontent rainchancecontent">12%</p></div></div><div class="windspeed topdiv"><img src="../src/Images/wind.svg" alt="" class="topicons"/><div class="topwrap"><p>Wind Speed</p><p class="topcontent windspeedcontent">26 Km/H</p></div></div><div class="humidity topdiv"><img src="../src/Images/moisture.svg" alt="" class="topicons"/><div class="topwrap"><p>Humidity</p><p class="topcontent humiditycontent">22%</p></div></div><div class="sunrise topdiv"><img src="../src/Images/sunrise (3).svg" alt="" class="topicons sunriseicon"/><div class="topwrap"><p>Sunrise</p><p class="topcontent sunrisecontent">6:22 AM</p></div></div><div class="sunset topdiv"><img src="../src/Images/sunset (1).svg" alt="" class="topicons sunseticon"/><div class="topwrap"><p>Sunset</p><p class="topcontent sunsetcontent">9:12 PM</p></div></div></div><div class="center"><div class="weatherdescription">Clear Sky</div><div class="currentweather"><div class="temperature">31 ºC</div><div class="separator"></div><img class="currenticon" src="../src/Images/sun.svg"/></div><div class="location">Lisbon, Portugal</div><div class="form"><input name="location" id="locationinput"/> <img src="../src/Images/search.svg" alt="search icon" class="search"/></div></div><div class="bottom"><div class="timechoice"><button class="daily">Daily</button> <button class="hourly">Hourly</button></div><div class="forecast"><div class="dailydivs"><div class="date">Saturday, 13</div><div class="dailyweather"><img src="../src/Images/cloud-drizzle.svg" alt="" class="forecasticon"/><div><div class="forecastmax">40 ºC</div><div class="forecastmin">32 ºC</div></div></div></div><div class="dailydivs"><div class="date">Sunday, 14</div><div class="dailyweather"><img src="../src/Images/cloud-lightning.svg" alt="" class="forecasticon"/><div><div class="forecastmax">40 ºC</div><div class="forecastmin">32 ºC</div></div></div></div><div class="dailydivs"><div class="date">Monday, 15</div><div class="dailyweather"><img src="../src/Images/cloud-rain.svg" alt="" class="forecasticon"/><div><div class="forecastmax">40 ºC</div><div class="forecastmin">32 ºC</div></div></div></div><div class="dailydivs"><div class="date">Tuesday, 16</div><div class="dailyweather"><img src="../src/Images/cloud-snow.svg" alt="" class="forecasticon"/><div><div class="forecastmax">40 ºC</div><div class="forecastmin">32 ºC</div></div></div></div><div class="dailydivs"><div class="date">Wednesday, 17</div><div class="dailyweather"><img src="../src/Images/cloud.svg" alt="" class="forecasticon"/><div><div class="forecastmax">40 ºC</div><div class="forecastmin">32 ºC</div></div></div></div><div class="dailydivs"><div class="date">Thursday, 18</div><div class="dailyweather"><img src="../src/Images/sun (1).svg" alt="" class="forecasticon"/><div><div class="forecastmax">40 ºC</div><div class="forecastmin">32 ºC</div></div></div></div><div class="dailydivs"><div class="date">Friday, 19</div><div class="dailyweather"><img src="../src/Images/cloud-drizzle.svg" alt="" class="forecasticon"/><div><div class="forecastmax">40 ºC</div><div class="forecastmin">32 ºC</div></div></div></div></div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="container">
+            <div class="top">
+                <div class="feelslike topdiv">
+                    <img
+                        src="../src/Images/thermometer-half.svg"
+                        alt=""
+                        class="topicons"
+                    />
+                    <div class="topwrap">
+                        <p>Feels Like</p>
+                        <p class="topcontent feelslikecontent">32 ºC</p>
+                    </div>
+                </div>
+                <div class="maxtemperature topdiv">
+                    <img
+                        src="../src/Images/thermometer-sun.svg"
+                        alt=""
+                        class="topicons"
+                    />
+                    <div class="topwrap">
+                        <p>Maximum</p>
+                        <p class="topcontent maxcontent">37 ºC</p>
+                    </div>
+                </div>
+                <div class="mintemperature topdiv">
+                    <img
+                        src="../src/Images/thermometer-snow.svg"
+                        alt=""
+                        class="topicons"
+                    />
+                    <div class="topwrap">
+                        <p>Minimum</p>
+                        <p class="topcontent mincontent">29 ºC</p>
+                    </div>
+                </div>
+                <div class="pop topdiv">
+                    <img
+                        src="../src/Images/umbrella.svg"
+                        alt=""
+                        class="topicons"
+                    />
+                    <div class="topwrap">
+                        <p>Chance Of Rain</p>
+                        <p class="topcontent rainchancecontent">12%</p>
+                    </div>
+                </div>
+                <div class="windspeed topdiv">
+                    <img src="../src/Images/wind.svg" alt="" class="topicons" />
+                    <div class="topwrap">
+                        <p>Wind Speed</p>
+                        <p class="topcontent windspeedcontent">26 Km/H</p>
+                    </div>
+                </div>
+                <div class="humidity topdiv">
+                    <img
+                        src="../src/Images/moisture.svg"
+                        alt=""
+                        class="topicons"
+                    />
+                    <div class="topwrap">
+                        <p>Humidity</p>
+                        <p class="topcontent humiditycontent">22%</p>
+                    </div>
+                </div>
+                <div class="sunrise topdiv">
+                    <img
+                        src="../src/Images/sunrise (3).svg"
+                        alt=""
+                        class="topicons sunriseicon"
+                    />
+                    <div class="topwrap">
+                        <p>Sunrise</p>
+                        <p class="topcontent sunrisecontent">6:22 AM</p>
+                    </div>
+                </div>
+                <div class="sunset topdiv">
+                    <img
+                        src="../src/Images/sunset (1).svg"
+                        alt=""
+                        class="topicons sunseticon"
+                    />
+                    <div class="topwrap">
+                        <p>Sunset</p>
+                        <p class="topcontent sunsetcontent">9:12 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="center">
+                <div class="weatherdescription">Clear Sky</div>
+                <div class="currentweather">
+                    <div class="temperature">31 ºC</div>
+                    <div class="separator"></div>
+                    <img class="currenticon" src="../src/Images/sun.svg" />
+                </div>
+                <div class="location">Lisbon, Portugal</div>
+                <div class="form">
+                    <input type="text" name="location" id="locationinput" />
+                    <img
+                        src="../src/Images/search.svg"
+                        alt="search icon"
+                        class="search"
+                    />
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="timechoice">
+                    <button class="daily">Daily</button>
+                    <button class="hourly">Hourly</button>
+                </div>
+                <div class="forecast">
+                    <div class="dailydivs">
+                        <div class="date">Saturday, 13</div>
+                        <div class="dailyweather">
+                            <img
+                                src="../src/Images/cloud-drizzle.svg"
+                                alt=""
+                                class="forecasticon"
+                            />
+                            <div>
+                                <div class="forecastmax">40 ºC</div>
+                                <div class="forecastmin">32 ºC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dailydivs">
+                        <div class="date">Sunday, 14</div>
+                        <div class="dailyweather">
+                            <img
+                                src="../src/Images/cloud-lightning.svg"
+                                alt=""
+                                class="forecasticon"
+                            />
+                            <div>
+                                <div class="forecastmax">40 ºC</div>
+                                <div class="forecastmin">32 ºC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dailydivs">
+                        <div class="date">Monday, 15</div>
+                        <div class="dailyweather">
+                            <img
+                                src="../src/Images/cloud-rain.svg"
+                                alt=""
+                                class="forecasticon"
+                            />
+                            <div>
+                                <div class="forecastmax">40 ºC</div>
+                                <div class="forecastmin">32 ºC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dailydivs">
+                        <div class="date">Tuesday, 16</div>
+                        <div class="dailyweather">
+                            <img
+                                src="../src/Images/cloud-snow.svg"
+                                alt=""
+                                class="forecasticon"
+                            />
+                            <div>
+                                <div class="forecastmax">40 ºC</div>
+                                <div class="forecastmin">32 ºC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dailydivs">
+                        <div class="date">Wednesday, 17</div>
+                        <div class="dailyweather">
+                            <img
+                                src="../src/Images/cloud.svg"
+                                alt=""
+                                class="forecasticon"
+                            />
+                            <div>
+                                <div class="forecastmax">40 ºC</div>
+                                <div class="forecastmin">32 ºC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dailydivs">
+                        <div class="date">Thursday, 18</div>
+                        <div class="dailyweather">
+                            <img
+                                src="../src/Images/sun (1).svg"
+                                alt=""
+                                class="forecasticon"
+                            />
+                            <div>
+                                <div class="forecastmax">40 ºC</div>
+                                <div class="forecastmin">32 ºC</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dailydivs">
+                        <div class="date">Friday, 19</div>
+                        <div class="dailyweather">
+                            <img
+                                src="../src/Images/cloud-drizzle.svg"
+                                alt=""
+                                class="forecasticon"
+                            />
+                            <div>
+                                <div class="forecastmax">40 ºC</div>
+                                <div class="forecastmin">32 ºC</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="main.js"></script></body>
+</html>

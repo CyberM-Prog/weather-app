@@ -5,69 +5,151 @@ import * as DOM from "./DOM";
 const locationInput = document.getElementById("locationinput");
 const searchBtn = document.querySelector(".search");
 
-const feelsLike = document.querySelector(".feelslikecontent")
-const maxTemperature = document.querySelector(".maxcontent")
-const minTemperature = document.querySelector(".mincontent")
-const chanceOfRain = document.querySelector(".rainchancecontent")
-const windSpeed = document.querySelector(".windspeedcontent")
-const humidity = document.querySelector(".humiditycontent")
-const sunrise = document.querySelector(".sunrisecontent")
-const sunset = document.querySelector(".sunsetcontent")
+const feelsLike = document.querySelector(".feelslikecontent");
+const maxTemperature = document.querySelector(".maxcontent");
+const minTemperature = document.querySelector(".mincontent");
+const chanceOfRain = document.querySelector(".rainchancecontent");
+const windSpeed = document.querySelector(".windspeedcontent");
+const humidity = document.querySelector(".humiditycontent");
+const sunrise = document.querySelector(".sunrisecontent");
+const sunset = document.querySelector(".sunsetcontent");
 
-const weatherDescription = document.querySelector(".weatherdescription")
-const currentTemperature = document.querySelector(".temperature")
-const currentIcon = document.querySelector(".currenticon")
-const location = document.querySelector(".location")
+const weatherDescription = document.querySelector(".weatherdescription");
+const currentTemperature = document.querySelector(".temperature");
+const currentIcon = document.querySelector(".currenticon");
+const location = document.querySelector(".location");
 
-const dailyDates = document.querySelectorAll(".date")
-const dailyIcons = document.querySelectorAll(".dailyweather > img")
-const dailyMaxTemps = document.querySelectorAll(".forecastmax")
-const dailyMinTemps = document.querySelectorAll(".forecastmin")
+const dailyDates = document.querySelectorAll(".date");
 
 async function searchWeather() {
     try {
-        const data = await apis.getWeatherInfo(locationInput.value);
+        let locationChosen;
+
+        if (locationInput.value) {
+            locationChosen = locationInput.value;
+        } else {
+            locationChosen = "Lisbon";
+        }
+
+        const data = await apis.getWeatherInfo(locationChosen);
         console.log(data);
 
-        DOM.changeBGImage(data.current.weather[0].id)
+        DOM.changeBGImage(data.current.weather[0].id);
 
-        feelsLike.textContent = `${Math.round(data.current.feels_like)} ºC`
-        maxTemperature.textContent = `${Math.round(data.daily[0].temp.max)} ºC`
-        minTemperature.textContent = `${Math.round(data.daily[0].temp.min)} ºC`
-        chanceOfRain.textContent = `${Math.round(data.daily[0].pop * 100)}%`
-        windSpeed.textContent = `${(Math.round(data.current.wind_speed * 3.6 * 10)) / 10} Km/H`
-        humidity.textContent = `${data.current.humidity}%`
-        sunrise.textContent = convertUnixToHour(data.current.sunrise, data.timezone)
-        sunset.textContent = convertUnixToHour(data.current.sunset, data.timezone);
+        feelsLike.textContent = `${Math.round(data.current.feels_like)} ºC`;
+        maxTemperature.textContent = `${Math.round(data.daily[0].temp.max)} ºC`;
+        minTemperature.textContent = `${Math.round(data.daily[0].temp.min)} ºC`;
+        chanceOfRain.textContent = `${Math.round(data.daily[0].pop * 100)}%`;
+        windSpeed.textContent = `${
+            Math.round(data.current.wind_speed * 3.6 * 10) / 10
+        } Km/H`;
+        humidity.textContent = `${data.current.humidity}%`;
+        sunrise.textContent = convertUnixToHour(
+            data.current.sunrise,
+            data.timezone
+        );
+        sunset.textContent = convertUnixToHour(
+            data.current.sunset,
+            data.timezone
+        );
 
-        weatherDescription.textContent = convertToTitleCase(data.current.weather[0].description)
-        location.textContent = `${(await apis.getLocationName(locationInput.value)).locationName}, ${(await apis.getLocationName(locationInput.value)).countryName}`
-        currentTemperature.textContent = `${Math.round(data.current.temp)} ºC`
-        DOM.changeCurrentWeatherIcon(data.current.weather[0].icon)
+        weatherDescription.textContent = convertToTitleCase(
+            data.current.weather[0].description
+        );
+        location.textContent = `${
+            (await apis.getLocationName(locationChosen)).locationName
+        }, ${(await apis.getLocationName(locationChosen)).countryName}`;
+        currentTemperature.textContent = `${Math.round(data.current.temp)} ºC`;
 
+        currentIcon.src = DOM.getWeatherIcon(data.current.weather[0].icon);
 
+        const days = createDaysArray(data.daily);
+        const dailyIcons = createDailyIconsArray(data.daily);
+        const dailyMaxTemps = getDailyMaxTemps(data.daily);
+        const dailyMinTemps = getDailyMinTemps(data.daily);
+
+        DOM.changeDailyForecast(days, dailyIcons, dailyMaxTemps, dailyMinTemps);
     } catch (error) {
         console.log(error);
     }
 }
 
+function createDaysArray(days) {
+    const daysArray = [];
+
+    for (let i = 1; i <= 7; i++) {
+        const convertedDay = `${convertUnixToWeekday(
+            days[i].dt
+        )}, ${convertUnixToDay(days[i].dt)}`;
+        daysArray.push(convertedDay);
+    }
+    return daysArray;
+}
+
+function createDailyIconsArray(days) {
+    const iconsArray = [];
+
+    for (let i = 1; i <= 7; i++) {
+        iconsArray.push(days[i].weather[0].icon);
+    }
+    return iconsArray;
+}
+
+function getDailyMaxTemps(days) {
+    const maxTempsArray = [];
+
+    for (let i = 1; i <= 7; i++) {
+        maxTempsArray.push(`${Math.round(days[i].temp.max)} ºC`);
+    }
+    return maxTempsArray;
+}
+
+function getDailyMinTemps(days) {
+    const minTempsArray = [];
+
+    for (let i = 1; i <= 7; i++) {
+        minTempsArray.push(`${Math.round(days[i].temp.min)} ºC`);
+    }
+    return minTempsArray;
+}
+
 function convertToTitleCase(string) {
     const arrayOfWords = string.split(" ");
 
-    const capitalizedArray = []
-    arrayOfWords.forEach((word) => capitalizedArray.push(word.charAt(0).toUpperCase() + word.substr(1)))
-    return capitalizedArray.join(" ")
+    const capitalizedArray = [];
+    arrayOfWords.forEach((word) =>
+        capitalizedArray.push(word.charAt(0).toUpperCase() + word.substr(1))
+    );
+    return capitalizedArray.join(" ");
 }
 
 function convertUnixToHour(time, timeZone) {
     const options = {
         hour: "numeric",
         timeZone,
-        minute: "numeric"
+        minute: "numeric",
     };
 
-    const hour = new Date(time * 1000)
-    return hour.toLocaleString("en-US", options)
+    const hour = new Date(time * 1000);
+    return hour.toLocaleString("en-US", options);
+}
+
+function convertUnixToDay(time, timeZone) {
+    const options = {
+        day: "numeric",
+    };
+
+    const day = new Date(time * 1000);
+    return day.toLocaleString("en-US", options);
+}
+
+function convertUnixToWeekday(time, timeZone) {
+    const options = {
+        weekday: "long",
+    };
+
+    const weekday = new Date(time * 1000);
+    return weekday.toLocaleString("en-US", options);
 }
 
 searchBtn.addEventListener("click", searchWeather);
@@ -79,3 +161,4 @@ hourlyButton.addEventListener("click", DOM.switchToHourlyForecast);
 const dailyButton = document.querySelector(".daily");
 
 dailyButton.addEventListener("click", DOM.switchToDailyForecast);
+searchWeather();
