@@ -47,27 +47,19 @@ function hideDailyForecast() {
 }
 
 export function switchToHourlyForecast() {
-    if (!document.querySelector(".firsthourlydivs")) {
-        hideDailyForecast();
-        createFirstHourlyDivs();
+    const forecastChildren = document.querySelectorAll(".forecast > *");
+    forecastChildren.forEach((child) => child.classList.add("hide"));
 
-        const rightArrow = document.querySelector(".rightarrow");
-        rightArrow.addEventListener("click", showLastHourlyDivs);
-    } else {
-        const forecastChildren = document.querySelectorAll(".forecast > *");
-        forecastChildren.forEach((child) => child.classList.add("hide"));
+    const firstHourlyDivs = document.querySelectorAll(".firsthourlydivs");
+    firstHourlyDivs.forEach((div) => div.classList.remove("hide"));
 
-        const firstHourlyDivs = document.querySelectorAll(".firsthourlydivs");
-        firstHourlyDivs.forEach((div) => div.classList.remove("hide"));
-
-        const rightArrow = document.querySelector(".rightarrow");
-        rightArrow.classList.remove("hide");
-    }
+    const rightArrow = document.querySelector(".rightarrow");
+    rightArrow.classList.remove("hide");
 }
 
 const forecastDiv = document.querySelector(".forecast");
 
-function createFirstHourlyDivs() {
+export function createFirstHourlyDivs() {
     for (let i = 1; i <= 12; i++) {
         const hourlyDiv = document.createElement("div");
         hourlyDiv.classList.add("firsthourlydivs");
@@ -88,14 +80,19 @@ function createFirstHourlyDivs() {
         hourlyTemperature.textContent = "40 ºC";
         hourlyDiv.appendChild(hourlyTemperature);
     }
+    createRightArrow();
+}
 
+function createRightArrow() {
     const rightArrow = document.createElement("img");
     rightArrow.classList.add("rightarrow");
+    rightArrow.classList.add("hide");
     rightArrow.setAttribute("src", "../src/Images/arrow-right-circle.svg");
+    rightArrow.addEventListener("click", showLastHourlyDivs);
     forecastDiv.appendChild(rightArrow);
 }
 
-function createLastHourlyDivs() {
+export function createLastHourlyDivs() {
     for (let i = 13; i <= 24; i++) {
         const hourlyDiv = document.createElement("div");
         hourlyDiv.classList.add("lasthourlydivs");
@@ -116,9 +113,13 @@ function createLastHourlyDivs() {
         hourlyTemperature.textContent = "41 ºC";
         hourlyDiv.appendChild(hourlyTemperature);
     }
+    createLeftArrow();
+}
 
+function createLeftArrow() {
     const leftArrow = document.createElement("img");
     leftArrow.classList.add("leftarrow");
+    leftArrow.classList.add("hide");
     leftArrow.setAttribute("src", "../src/Images/arrow-left-circle.svg");
     forecastDiv.appendChild(leftArrow);
 }
@@ -137,7 +138,7 @@ function showLastHourlyDivs() {
     leftArrow.addEventListener("click", showFirstHourlyDivs);
 }
 
-function hideFirstHourlyDivs() {
+export function hideFirstHourlyDivs() {
     const firstHourlyDivs = document.querySelectorAll(".firsthourlydivs");
 
     firstHourlyDivs.forEach((div) => div.classList.add("hide"));
@@ -155,7 +156,7 @@ function showFirstHourlyDivs() {
     rightArrow.classList.remove("hide");
 }
 
-function hideLastHourlyDivs() {
+export function hideLastHourlyDivs() {
     const lastHourlyDivs = document.querySelectorAll(".lasthourlydivs");
 
     lastHourlyDivs.forEach((div) => div.classList.add("hide"));
@@ -213,5 +214,19 @@ export function changeDailyForecast(days, codes, maxTemps, minTemps) {
         dailyMaxTemps[i].textContent = maxTemps[i];
 
         dailyMinTemps[i].textContent = minTemps[i];
+    }
+}
+
+export function changeHourlyForecast(hours, codes, temps) {
+    const hourElements = document.querySelectorAll(".hour");
+    const hourlyForecastIcons = document.querySelectorAll(".hourlyicon");
+    const hourlyTemps = document.querySelectorAll(".hourlytemperature");
+
+    for (let i = 0; i < 24; i++) {
+        hourElements[i].textContent = hours[i];
+
+        hourlyForecastIcons[i].src = getWeatherIcon(codes[i]);
+
+        hourlyTemps[i].textContent = temps[i];
     }
 }

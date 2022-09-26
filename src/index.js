@@ -19,8 +19,6 @@ const currentTemperature = document.querySelector(".temperature");
 const currentIcon = document.querySelector(".currenticon");
 const location = document.querySelector(".location");
 
-const dailyDates = document.querySelectorAll(".date");
-
 async function searchWeather() {
     try {
         let locationChosen;
@@ -63,24 +61,31 @@ async function searchWeather() {
 
         currentIcon.src = DOM.getWeatherIcon(data.current.weather[0].icon);
 
-        const days = createDaysArray(data.daily);
+        const days = createDaysArray(data.daily, data.timezone);
         const dailyIcons = createDailyIconsArray(data.daily);
         const dailyMaxTemps = getDailyMaxTemps(data.daily);
         const dailyMinTemps = getDailyMinTemps(data.daily);
 
         DOM.changeDailyForecast(days, dailyIcons, dailyMaxTemps, dailyMinTemps);
+
+        const hours = createHoursArray(data.hourly, data.timezone);
+        const hourlyIcons = createHourlyIconsArray(data.hourly);
+        const hourlyTemps = getHourlyTemps(data.hourly);
+
+        DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
     } catch (error) {
         console.log(error);
     }
 }
 
-function createDaysArray(days) {
+function createDaysArray(days, timeZone) {
     const daysArray = [];
 
     for (let i = 1; i <= 7; i++) {
         const convertedDay = `${convertUnixToWeekday(
-            days[i].dt
-        )}, ${convertUnixToDay(days[i].dt)}`;
+            days[i].dt,
+            timeZone
+        )}, ${convertUnixToDay(days[i].dt, timeZone)}`;
         daysArray.push(convertedDay);
     }
     return daysArray;
@@ -113,6 +118,34 @@ function getDailyMinTemps(days) {
     return minTempsArray;
 }
 
+function createHoursArray(hours, timeZone) {
+    const hoursArray = [];
+
+    for (let i = 1; i <= 24; i++) {
+        const convertedHour = `${convertWithoutMinutes(hours[i].dt, timeZone)}`;
+        hoursArray.push(convertedHour);
+    }
+    return hoursArray;
+}
+
+function createHourlyIconsArray(hours) {
+    const iconsArray = [];
+
+    for (let i = 1; i <= 24; i++) {
+        iconsArray.push(hours[i].weather[0].icon);
+    }
+    return iconsArray;
+}
+
+function getHourlyTemps(hours) {
+    const TempsArray = [];
+
+    for (let i = 1; i <= 24; i++) {
+        TempsArray.push(`${Math.round(hours[i].temp)} ºC`);
+    }
+    return TempsArray;
+}
+
 function convertToTitleCase(string) {
     const arrayOfWords = string.split(" ");
 
@@ -134,9 +167,20 @@ function convertUnixToHour(time, timeZone) {
     return hour.toLocaleString("en-US", options);
 }
 
+function convertWithoutMinutes(time, timeZone) {
+    const options = {
+        hour: "numeric",
+        timeZone,
+    };
+
+    const hour = new Date(time * 1000);
+    return hour.toLocaleString("en-US", options);
+}
+
 function convertUnixToDay(time, timeZone) {
     const options = {
         day: "numeric",
+        timeZone,
     };
 
     const day = new Date(time * 1000);
@@ -146,6 +190,7 @@ function convertUnixToDay(time, timeZone) {
 function convertUnixToWeekday(time, timeZone) {
     const options = {
         weekday: "long",
+        timeZone,
     };
 
     const weekday = new Date(time * 1000);
@@ -161,4 +206,11 @@ hourlyButton.addEventListener("click", DOM.switchToHourlyForecast);
 const dailyButton = document.querySelector(".daily");
 
 dailyButton.addEventListener("click", DOM.switchToDailyForecast);
+
+DOM.createFirstHourlyDivs();
+DOM.hideFirstHourlyDivs();
+
+DOM.createLastHourlyDivs();
+DOM.hideLastHourlyDivs();
+
 searchWeather();
