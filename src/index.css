@@ -10,7 +10,6 @@
 #container {
     height: 100vh;
     width: 100vw;
-    background-image: url(./Images/william-bout-RPzWI0rolS8-unsplash.jpg);
     background-size: cover;
     background-position: 0;
     background-repeat: no-repeat;
@@ -33,6 +32,7 @@
 }
 
 .temperature {
+    white-space: nowrap;
     font-weight: 600;
     font-size: 5rem;
 }
@@ -250,6 +250,10 @@ input {
 }
 
 .hide {
+    display: none;
+}
+
+.hideall > * {
     display: none;
 }
 

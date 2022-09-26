@@ -19,6 +19,9 @@ const currentTemperature = document.querySelector(".temperature");
 const currentIcon = document.querySelector(".currenticon");
 const location = document.querySelector(".location");
 
+const container = document.querySelector("#container");
+container.classList.add("hideall");
+
 async function searchWeather() {
     try {
         let locationChosen;
@@ -73,6 +76,8 @@ async function searchWeather() {
         const hourlyTemps = getHourlyTemps(data.hourly);
 
         DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
+
+        container.classList.remove("hideall");
     } catch (error) {
         console.log(error);
     }
