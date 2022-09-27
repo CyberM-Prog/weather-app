@@ -274,3 +274,12 @@ input {
 .hourlyicon {
     height: 3rem;
 }
+
+.unit {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: -0.75rem;
+    background-color: transparent;
+    border: 0;
+    color: white;
+}

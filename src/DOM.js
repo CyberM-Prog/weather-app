@@ -204,7 +204,6 @@ export function changeDailyForecast(days, codes, maxTemps, minTemps) {
     const dailyForecastIcons = document.querySelectorAll(".forecasticon");
     const dailyMaxTemps = document.querySelectorAll(".forecastmax");
     const dailyMinTemps = document.querySelectorAll(".forecastmin");
-    console.log(dailyForecastIcons);
 
     for (let i = 0; i < 7; i++) {
         dailyDates[i].textContent = days[i];

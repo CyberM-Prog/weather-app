@@ -10,11 +10,21 @@ async function getCoordinates(location) {
     return coordinates;
 }
 
-export async function getWeatherInfo(location) {
+export async function getWeatherInfoCelsius(location) {
     const coordinates = await getCoordinates(location);
 
     const response = await fetch(
         `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${key}&units=metric`
+    );
+    const data = await response.json();
+    return data;
+}
+
+export async function getWeatherInfoFarenheits(location) {
+    const coordinates = await getCoordinates(location);
+
+    const response = await fetch(
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${key}&units=imperial`
     );
     const data = await response.json();
     return data;
