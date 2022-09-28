@@ -40,6 +40,16 @@ export function changeBGImage(code) {
             "url(../src/Images/william-bout-RPzWI0rolS8-unsplash.jpg)";
 }
 
+export function improveReadability(code) {
+    if (code >= 500 && code < 600) {
+        container.style.backgroundColor = "rgba(0, 0, 0, 0.49)"
+    }
+    else if (code > 800 && code < 900) {
+        container.style.backgroundColor = "rgba(0, 0, 0, 0.2)"
+    }
+    else container.style.backgroundColor = "rgba(0, 0, 0, 0.2)"
+}
+
 const dailyDivs = document.querySelectorAll(".dailydivs");
 
 function hideDailyForecast() {

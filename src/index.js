@@ -38,8 +38,6 @@ async function searchWeather() {
             const data = await apis.getWeatherInfoCelsius(locationChosen);
             console.log(data);
 
-            DOM.changeBGImage(data.current.weather[0].id);
-
             feelsLike.textContent = `${Math.round(data.current.feels_like)} ºC`;
             maxTemperature.textContent = `${Math.round(
                 data.daily[0].temp.max
@@ -92,11 +90,12 @@ async function searchWeather() {
             const hourlyTemps = getHourlyTemps(data.hourly, "ºC");
 
             DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
+
+            DOM.changeBGImage(data.current.weather[0].id);
+            DOM.improveReadability(data.current.weather[0].id)
         } else {
             const data = await apis.getWeatherInfoFarenheits(locationChosen);
             console.log(data);
-
-            DOM.changeBGImage(data.current.weather[0].id);
 
             feelsLike.textContent = `${Math.round(data.current.feels_like)} ºF`;
             maxTemperature.textContent = `${Math.round(
@@ -150,6 +149,9 @@ async function searchWeather() {
             const hourlyTemps = getHourlyTemps(data.hourly, "ºF");
 
             DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
+
+            DOM.changeBGImage(data.current.weather[0].id);
+            DOM.improveReadability(data.current.weather[0].id)
         }
 
         changeUnitsButton.addEventListener("click", switchUnits);
