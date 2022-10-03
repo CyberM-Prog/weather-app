@@ -1,6 +1,6 @@
 const container = document.getElementById("container");
 
-export function changeBGImage(code) {
+export function changeBGImage(code, icon) {
     if (code >= 200 && code < 300) {
         container.style.backgroundImage =
             "url(../src/Images/johannes-plenio-ESL1rIs9j48-unsplash.jpg)";
@@ -35,19 +35,21 @@ export function changeBGImage(code) {
     } else if (code === 781) {
         container.style.backgroundImage =
             "url(../src/Images/espen-bierud-W43gm6TD118-unsplash.jpg)";
-    } else
+    } else if (icon === "01n") {
+        container.style.backgroundImage =
+            "url(../src/Images/ryan-hutton-Jztmx9yqjBw-unsplash.jpg)";
+    } else {
         container.style.backgroundImage =
             "url(../src/Images/william-bout-RPzWI0rolS8-unsplash.jpg)";
+    }
 }
 
-export function improveReadability(code) {
+export function improveReadability(code, icon) {
     if (code >= 500 && code < 600) {
-        container.style.backgroundColor = "rgba(0, 0, 0, 0.49)"
-    }
-    else if (code > 800 && code < 900) {
-        container.style.backgroundColor = "rgba(0, 0, 0, 0.2)"
-    }
-    else container.style.backgroundColor = "rgba(0, 0, 0, 0.2)"
+        container.style.backgroundColor = "rgba(0, 0, 0, 0.49)";
+    } else if (icon === "01n") {
+        container.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+    } else container.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
 }
 
 const dailyDivs = document.querySelectorAll(".dailydivs");

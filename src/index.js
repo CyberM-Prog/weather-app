@@ -91,8 +91,14 @@ async function searchWeather() {
 
             DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
 
-            DOM.changeBGImage(data.current.weather[0].id);
-            DOM.improveReadability(data.current.weather[0].id)
+            DOM.changeBGImage(
+                data.current.weather[0].id,
+                data.current.weather[0].icon
+            );
+            DOM.improveReadability(
+                data.current.weather[0].id,
+                data.current.weather[0].icon
+            );
         } else {
             const data = await apis.getWeatherInfoFarenheits(locationChosen);
             console.log(data);
@@ -150,8 +156,14 @@ async function searchWeather() {
 
             DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
 
-            DOM.changeBGImage(data.current.weather[0].id);
-            DOM.improveReadability(data.current.weather[0].id)
+            DOM.changeBGImage(
+                data.current.weather[0].id,
+                data.current.weather[0].icon
+            );
+            DOM.improveReadability(
+                data.current.weather[0].id,
+                data.current.weather[0].icon
+            );
         }
 
         changeUnitsButton.addEventListener("click", switchUnits);
