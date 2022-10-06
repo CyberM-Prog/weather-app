@@ -24,6 +24,8 @@ container.classList.add("hideall");
 
 const changeUnitsButton = document.querySelector(".unit");
 
+const errorMessage = document.querySelector(".error");
+
 async function searchWeather() {
     try {
         let locationChosen;
@@ -278,8 +280,13 @@ async function searchWeather() {
         searchBtn.addEventListener("click", function () {
             changeUnitsButton.removeEventListener("click", switchUnits);
         });
+
+        errorMessage.classList.add("transparent");
     } catch (error) {
-        console.log(error);
+        errorMessage.classList.add("transparent");
+        await new Promise((resolve) => setTimeout(resolve, 30));
+
+        errorMessage.classList.remove("transparent");
     }
 }
 
