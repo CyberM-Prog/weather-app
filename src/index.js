@@ -411,6 +411,10 @@ function convertUnixToWeekday(time, timeZone) {
 
 searchBtn.addEventListener("click", searchWeather);
 
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Enter") searchWeather();
+});
+
 const hourlyButton = document.querySelector(".hourly");
 
 hourlyButton.addEventListener("click", DOM.switchToHourlyForecast);
