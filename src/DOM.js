@@ -54,10 +54,6 @@ export function improveReadability(code, icon) {
 
 const dailyDivs = document.querySelectorAll(".dailydivs");
 
-function hideDailyForecast() {
-    dailyDivs.forEach((div) => div.classList.add("hide"));
-}
-
 export function switchToHourlyForecast() {
     const forecastChildren = document.querySelectorAll(".forecast > *");
     forecastChildren.forEach((child) => child.classList.add("hide"));
@@ -73,26 +69,30 @@ const forecastDiv = document.querySelector(".forecast");
 
 export function createFirstHourlyDivs() {
     for (let i = 1; i <= 12; i++) {
-        const hourlyDiv = document.createElement("div");
-        hourlyDiv.classList.add("firsthourlydivs");
-        forecastDiv.appendChild(hourlyDiv);
-
-        const hour = document.createElement("div");
-        hour.classList.add("hour");
-        hour.textContent = "12 A.M.";
-        hourlyDiv.appendChild(hour);
-
-        const hourlyIcon = document.createElement("img");
-        hourlyIcon.classList.add("hourlyicon");
-        hourlyIcon.src = "../src/Images/cloud-drizzle.svg";
-        hourlyDiv.appendChild(hourlyIcon);
-
-        const hourlyTemperature = document.createElement("div");
-        hourlyTemperature.classList.add("hourlytemperature");
-        hourlyTemperature.textContent = "40 ºC";
-        hourlyDiv.appendChild(hourlyTemperature);
+        createHourlyDiv("firsthourlydivs");
     }
     createRightArrow();
+}
+
+function createHourlyDiv(className) {
+    const hourlyDiv = document.createElement("div");
+    hourlyDiv.classList.add(className);
+    forecastDiv.appendChild(hourlyDiv);
+
+    const hour = document.createElement("div");
+    hour.classList.add("hour");
+    hour.textContent = "12 A.M.";
+    hourlyDiv.appendChild(hour);
+
+    const hourlyIcon = document.createElement("img");
+    hourlyIcon.classList.add("hourlyicon");
+    hourlyIcon.src = "../src/Images/cloud-drizzle.svg";
+    hourlyDiv.appendChild(hourlyIcon);
+
+    const hourlyTemperature = document.createElement("div");
+    hourlyTemperature.classList.add("hourlytemperature");
+    hourlyTemperature.textContent = "40 ºC";
+    hourlyDiv.appendChild(hourlyTemperature);
 }
 
 function createRightArrow() {
@@ -106,24 +106,7 @@ function createRightArrow() {
 
 export function createLastHourlyDivs() {
     for (let i = 13; i <= 24; i++) {
-        const hourlyDiv = document.createElement("div");
-        hourlyDiv.classList.add("lasthourlydivs");
-        forecastDiv.appendChild(hourlyDiv);
-
-        const hour = document.createElement("div");
-        hour.classList.add("hour");
-        hour.textContent = "1 A.M.";
-        hourlyDiv.appendChild(hour);
-
-        const hourlyIcon = document.createElement("img");
-        hourlyIcon.classList.add("hourlyicon");
-        hourlyIcon.src = "../src/Images/cloud-drizzle.svg";
-        hourlyDiv.appendChild(hourlyIcon);
-
-        const hourlyTemperature = document.createElement("div");
-        hourlyTemperature.classList.add("hourlytemperature");
-        hourlyTemperature.textContent = "41 ºC";
-        hourlyDiv.appendChild(hourlyTemperature);
+        createHourlyDiv("lasthourlydivs");
     }
     createLeftArrow();
 }
@@ -193,8 +176,6 @@ export function switchToDailyForecast() {
 export function changeTextContent(text) {
     this.textContent = text;
 }
-
-const currentIcon = document.querySelector(".currenticon");
 
 export function getWeatherIcon(code) {
     if (code === "01d") return "../src/Images/sun.svg";

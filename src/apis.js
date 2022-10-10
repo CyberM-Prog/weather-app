@@ -20,7 +20,7 @@ export async function getWeatherInfoCelsius(location) {
     return data;
 }
 
-export async function getWeatherInfoFarenheits(location) {
+export async function getWeatherInfoFahrenheit(location) {
     const coordinates = await getCoordinates(location);
 
     const response = await fetch(

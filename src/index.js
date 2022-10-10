@@ -36,257 +36,171 @@ async function searchWeather() {
             locationChosen = "Lisbon";
         }
 
-        if (!changeUnitsButton.classList.contains("farenheit")) {
+        if (!changeUnitsButton.classList.contains("fahrenheit")) {
             const data = await apis.getWeatherInfoCelsius(locationChosen);
-            console.log(data);
 
-            feelsLike.textContent = `${Math.round(data.current.feels_like)} ºC`;
-            maxTemperature.textContent = `${Math.round(
-                data.daily[0].temp.max
-            )} ºC`;
-            minTemperature.textContent = `${Math.round(
-                data.daily[0].temp.min
-            )} ºC`;
-            chanceOfRain.textContent = `${Math.round(
-                data.daily[0].pop * 100
-            )}%`;
-            windSpeed.textContent = `${
-                Math.round(data.current.wind_speed * 3.6 * 10) / 10
-            } Km/H`;
-            humidity.textContent = `${data.current.humidity}%`;
-            sunrise.textContent = convertUnixToHour(
-                data.current.sunrise,
-                data.timezone
-            );
-            sunset.textContent = convertUnixToHour(
-                data.current.sunset,
-                data.timezone
-            );
-
-            weatherDescription.textContent = convertToTitleCase(
-                data.current.weather[0].description
-            );
-            location.textContent = `${
-                (await apis.getLocationName(locationChosen)).locationName
-            }, ${(await apis.getLocationName(locationChosen)).countryName}`;
-            currentTemperature.textContent = `${Math.round(
-                data.current.temp
-            )} ºC`;
-
-            currentIcon.src = DOM.getWeatherIcon(data.current.weather[0].icon);
-
-            const days = createDaysArray(data.daily, data.timezone);
-            const dailyIcons = createDailyIconsArray(data.daily);
-            const dailyMaxTemps = getDailyMaxTemps(data.daily, "ºC");
-            const dailyMinTemps = getDailyMinTemps(data.daily, "ºC");
-
-            DOM.changeDailyForecast(
-                days,
-                dailyIcons,
-                dailyMaxTemps,
-                dailyMinTemps
-            );
-
-            const hours = createHoursArray(data.hourly, data.timezone);
-            const hourlyIcons = createHourlyIconsArray(data.hourly);
-            const hourlyTemps = getHourlyTemps(data.hourly, "ºC");
-
-            DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
-
-            DOM.changeBGImage(
-                data.current.weather[0].id,
-                data.current.weather[0].icon
-            );
-            DOM.improveReadability(
-                data.current.weather[0].id,
-                data.current.weather[0].icon
-            );
+            showData(data, "ºC", "Km/H", locationChosen);
         } else {
-            const data = await apis.getWeatherInfoFarenheits(locationChosen);
-            console.log(data);
+            const data = await apis.getWeatherInfoFahrenheit(locationChosen);
 
-            feelsLike.textContent = `${Math.round(data.current.feels_like)} ºF`;
-            maxTemperature.textContent = `${Math.round(
-                data.daily[0].temp.max
-            )} ºF`;
-            minTemperature.textContent = `${Math.round(
-                data.daily[0].temp.min
-            )} ºF`;
-            chanceOfRain.textContent = `${Math.round(
-                data.daily[0].pop * 100
-            )}%`;
-            windSpeed.textContent = `${
-                Math.round(data.current.wind_speed * 10) / 10
-            } Mph`;
-            humidity.textContent = `${data.current.humidity}%`;
-            sunrise.textContent = convertUnixToHour(
-                data.current.sunrise,
-                data.timezone
-            );
-            sunset.textContent = convertUnixToHour(
-                data.current.sunset,
-                data.timezone
-            );
-
-            weatherDescription.textContent = convertToTitleCase(
-                data.current.weather[0].description
-            );
-            location.textContent = `${
-                (await apis.getLocationName(locationChosen)).locationName
-            }, ${(await apis.getLocationName(locationChosen)).countryName}`;
-            currentTemperature.textContent = `${Math.round(
-                data.current.temp
-            )} ºF`;
-
-            currentIcon.src = DOM.getWeatherIcon(data.current.weather[0].icon);
-
-            const days = createDaysArray(data.daily, data.timezone);
-            const dailyIcons = createDailyIconsArray(data.daily);
-            const dailyMaxTemps = getDailyMaxTemps(data.daily, "ºF");
-            const dailyMinTemps = getDailyMinTemps(data.daily, "ºF");
-
-            DOM.changeDailyForecast(
-                days,
-                dailyIcons,
-                dailyMaxTemps,
-                dailyMinTemps
-            );
-
-            const hours = createHoursArray(data.hourly, data.timezone);
-            const hourlyIcons = createHourlyIconsArray(data.hourly);
-            const hourlyTemps = getHourlyTemps(data.hourly, "ºF");
-
-            DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
-
-            DOM.changeBGImage(
-                data.current.weather[0].id,
-                data.current.weather[0].icon
-            );
-            DOM.improveReadability(
-                data.current.weather[0].id,
-                data.current.weather[0].icon
-            );
+            showData(data, "ºF", "Mph", locationChosen);
         }
 
-        changeUnitsButton.addEventListener("click", switchUnits);
-
-        async function switchUnits() {
-            if (changeUnitsButton.classList.contains("farenheit")) {
-                const data = await apis.getWeatherInfoCelsius(locationChosen);
-                console.log(data);
-                console.log(locationChosen);
-
-                feelsLike.textContent = `${Math.round(
-                    data.current.feels_like
-                )} ºC`;
-                maxTemperature.textContent = `${Math.round(
-                    data.daily[0].temp.max
-                )} ºC`;
-                minTemperature.textContent = `${Math.round(
-                    data.daily[0].temp.min
-                )} ºC`;
-
-                windSpeed.textContent = `${
-                    Math.round(data.current.wind_speed * 3.6 * 10) / 10
-                } Km/H`;
-
-                currentTemperature.textContent = `${Math.round(
-                    data.current.temp
-                )} ºC`;
-
-                const days = createDaysArray(data.daily, data.timezone);
-                const dailyIcons = createDailyIconsArray(data.daily);
-                const dailyMaxTemps = getDailyMaxTemps(data.daily, "ºC");
-                const dailyMinTemps = getDailyMinTemps(data.daily, "ºC");
-
-                DOM.changeDailyForecast(
-                    days,
-                    dailyIcons,
-                    dailyMaxTemps,
-                    dailyMinTemps
-                );
-
-                const hours = createHoursArray(data.hourly, data.timezone);
-                const hourlyIcons = createHourlyIconsArray(data.hourly);
-                const hourlyTemps = getHourlyTemps(data.hourly, "ºC");
-
-                DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
-
-                changeUnitsButton.classList.remove("farenheit");
-                changeUnitsButton.textContent = "Switch to ºF";
-            } else {
-                const dataFarenheits = await apis.getWeatherInfoFarenheits(
-                    locationChosen
-                );
-                console.log(dataFarenheits);
-
-                feelsLike.textContent = `${Math.round(
-                    dataFarenheits.current.feels_like
-                )} ºF`;
-                maxTemperature.textContent = `${Math.round(
-                    dataFarenheits.daily[0].temp.max
-                )} ºF`;
-                minTemperature.textContent = `${Math.round(
-                    dataFarenheits.daily[0].temp.min
-                )} ºF`;
-
-                windSpeed.textContent = `${
-                    Math.round(dataFarenheits.current.wind_speed * 10) / 10
-                } Mph`;
-
-                currentTemperature.textContent = `${Math.round(
-                    dataFarenheits.current.temp
-                )} ºF`;
-
-                const days = createDaysArray(
-                    dataFarenheits.daily,
-                    dataFarenheits.timezone
-                );
-                const dailyIcons = createDailyIconsArray(dataFarenheits.daily);
-                const dailyMaxTemps = getDailyMaxTemps(
-                    dataFarenheits.daily,
-                    "ºF"
-                );
-                const dailyMinTemps = getDailyMinTemps(
-                    dataFarenheits.daily,
-                    "ºF"
-                );
-
-                DOM.changeDailyForecast(
-                    days,
-                    dailyIcons,
-                    dailyMaxTemps,
-                    dailyMinTemps
-                );
-
-                const hours = createHoursArray(
-                    dataFarenheits.hourly,
-                    dataFarenheits.timezone
-                );
-                const hourlyIcons = createHourlyIconsArray(
-                    dataFarenheits.hourly
-                );
-                const hourlyTemps = getHourlyTemps(dataFarenheits.hourly, "ºF");
-
-                DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
-
-                changeUnitsButton.classList.add("farenheit");
-                changeUnitsButton.textContent = "Switch to ºC";
-            }
-        }
+        changeUnitsButton.addEventListener("click", useSwitchUnits);
 
         container.classList.remove("hideall");
 
-        searchBtn.addEventListener("click", function () {
-            changeUnitsButton.removeEventListener("click", switchUnits);
+        searchBtn.addEventListener("click", () => {
+            changeUnitsButton.removeEventListener("click", useSwitchUnits);
         });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.code === "Enter")
+                changeUnitsButton.removeEventListener("click", useSwitchUnits);
+        });
+
+        function useSwitchUnits() {
+            switchUnits(locationChosen);
+        }
 
         errorMessage.classList.add("transparent");
     } catch (error) {
         errorMessage.classList.add("transparent");
         await new Promise((resolve) => setTimeout(resolve, 30));
-
         errorMessage.classList.remove("transparent");
+    }
+}
+
+async function showData(data, tempUnits, speedUnits, locationChosen) {
+    chanceOfRain.textContent = `${Math.round(data.daily[0].pop * 100)}%`;
+
+    humidity.textContent = `${data.current.humidity}%`;
+
+    sunrise.textContent = convertUnixToHour(
+        data.current.sunrise,
+        data.timezone
+    );
+    sunset.textContent = convertUnixToHour(data.current.sunset, data.timezone);
+
+    weatherDescription.textContent = convertToTitleCase(
+        data.current.weather[0].description
+    );
+    location.textContent = `${
+        (await apis.getLocationName(locationChosen)).locationName
+    }, ${(await apis.getLocationName(locationChosen)).countryName}`;
+
+    currentIcon.src = DOM.getWeatherIcon(data.current.weather[0].icon);
+
+    DOM.changeBGImage(data.current.weather[0].id, data.current.weather[0].icon);
+    DOM.improveReadability(
+        data.current.weather[0].id,
+        data.current.weather[0].icon
+    );
+
+    feelsLike.textContent = `${Math.round(
+        data.current.feels_like
+    )} ${tempUnits}`;
+    maxTemperature.textContent = `${Math.round(
+        data.daily[0].temp.max
+    )} ${tempUnits}`;
+    minTemperature.textContent = `${Math.round(
+        data.daily[0].temp.min
+    )} ${tempUnits}`;
+    windSpeed.textContent = `${
+        Math.round(data.current.wind_speed * 3.6 * 10) / 10
+    } ${speedUnits}`;
+
+    currentTemperature.textContent = `${Math.round(
+        data.current.temp
+    )} ${tempUnits}`;
+
+    const days = createDaysArray(data.daily, data.timezone);
+    const dailyIcons = createDailyIconsArray(data.daily);
+    const dailyMaxTemps = getDailyMaxTemps(data.daily, tempUnits);
+    const dailyMinTemps = getDailyMinTemps(data.daily, tempUnits);
+
+    DOM.changeDailyForecast(days, dailyIcons, dailyMaxTemps, dailyMinTemps);
+
+    const hours = createHoursArray(data.hourly, data.timezone);
+    const hourlyIcons = createHourlyIconsArray(data.hourly);
+    const hourlyTemps = getHourlyTemps(data.hourly, tempUnits);
+
+    DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
+}
+
+async function switchUnits(locationChosen) {
+    if (changeUnitsButton.classList.contains("fahrenheit")) {
+        const data = await apis.getWeatherInfoCelsius(locationChosen);
+
+        feelsLike.textContent = `${Math.round(data.current.feels_like)} ºC`;
+        maxTemperature.textContent = `${Math.round(data.daily[0].temp.max)} ºC`;
+        minTemperature.textContent = `${Math.round(data.daily[0].temp.min)} ºC`;
+
+        windSpeed.textContent = `${
+            Math.round(data.current.wind_speed * 3.6 * 10) / 10
+        } Km/H`;
+
+        currentTemperature.textContent = `${Math.round(data.current.temp)} ºC`;
+
+        const days = createDaysArray(data.daily, data.timezone);
+        const dailyIcons = createDailyIconsArray(data.daily);
+        const dailyMaxTemps = getDailyMaxTemps(data.daily, "ºC");
+        const dailyMinTemps = getDailyMinTemps(data.daily, "ºC");
+
+        DOM.changeDailyForecast(days, dailyIcons, dailyMaxTemps, dailyMinTemps);
+
+        const hours = createHoursArray(data.hourly, data.timezone);
+        const hourlyIcons = createHourlyIconsArray(data.hourly);
+        const hourlyTemps = getHourlyTemps(data.hourly, "ºC");
+
+        DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
+
+        changeUnitsButton.classList.remove("fahrenheit");
+        changeUnitsButton.textContent = "Switch to ºF";
+    } else {
+        const dataFahrenheit = await apis.getWeatherInfoFahrenheit(
+            locationChosen
+        );
+
+        feelsLike.textContent = `${Math.round(
+            dataFahrenheit.current.feels_like
+        )} ºF`;
+        maxTemperature.textContent = `${Math.round(
+            dataFahrenheit.daily[0].temp.max
+        )} ºF`;
+        minTemperature.textContent = `${Math.round(
+            dataFahrenheit.daily[0].temp.min
+        )} ºF`;
+
+        windSpeed.textContent = `${
+            Math.round(dataFahrenheit.current.wind_speed * 10) / 10
+        } Mph`;
+
+        currentTemperature.textContent = `${Math.round(
+            dataFahrenheit.current.temp
+        )} ºF`;
+
+        const days = createDaysArray(
+            dataFahrenheit.daily,
+            dataFahrenheit.timezone
+        );
+        const dailyIcons = createDailyIconsArray(dataFahrenheit.daily);
+        const dailyMaxTemps = getDailyMaxTemps(dataFahrenheit.daily, "ºF");
+        const dailyMinTemps = getDailyMinTemps(dataFahrenheit.daily, "ºF");
+
+        DOM.changeDailyForecast(days, dailyIcons, dailyMaxTemps, dailyMinTemps);
+
+        const hours = createHoursArray(
+            dataFahrenheit.hourly,
+            dataFahrenheit.timezone
+        );
+        const hourlyIcons = createHourlyIconsArray(dataFahrenheit.hourly);
+        const hourlyTemps = getHourlyTemps(dataFahrenheit.hourly, "ºF");
+
+        DOM.changeHourlyForecast(hours, hourlyIcons, hourlyTemps);
+
+        changeUnitsButton.classList.add("fahrenheit");
+        changeUnitsButton.textContent = "Switch to ºC";
     }
 }
 
