@@ -2,7 +2,7 @@ const key = "9b2ecba753a2d0b501b16be3452469ff";
 
 async function getCoordinates(location) {
     const response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`,
+        `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`,
         {mode: "cors"}
     );
     const data = await response.json();
@@ -32,7 +32,7 @@ export async function getWeatherInfoFahrenheit(location) {
 
 export async function getLocationName(location) {
     const response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`,
+        `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${key}`,
         {mode: "cors"}
     );
 
