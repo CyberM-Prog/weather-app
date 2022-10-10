@@ -1,4 +1,5 @@
 import "./index.css";
+import html from "./index.html";
 import * as apis from "./apis";
 import * as DOM from "./DOM";
 
@@ -39,16 +40,14 @@ async function searchWeather() {
         if (!changeUnitsButton.classList.contains("fahrenheit")) {
             const data = await apis.getWeatherInfoCelsius(locationChosen);
 
-            showData(data, "ºC", "Km/H", locationChosen);
+            await showData(data, "ºC", "Km/H", locationChosen);
         } else {
             const data = await apis.getWeatherInfoFahrenheit(locationChosen);
 
-            showData(data, "ºF", "Mph", locationChosen);
+            await showData(data, "ºF", "Mph", locationChosen);
         }
 
         changeUnitsButton.addEventListener("click", useSwitchUnits);
-
-        container.classList.remove("hideall");
 
         searchBtn.addEventListener("click", () => {
             changeUnitsButton.removeEventListener("click", useSwitchUnits);
@@ -64,6 +63,8 @@ async function searchWeather() {
         }
 
         errorMessage.classList.add("transparent");
+
+        container.classList.remove("hideall");
     } catch (error) {
         errorMessage.classList.add("transparent");
         await new Promise((resolve) => setTimeout(resolve, 30));
