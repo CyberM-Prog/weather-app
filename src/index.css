@@ -14,41 +14,42 @@
     background-position: 0;
     background-repeat: no-repeat;
     display: grid;
-    grid-template-rows: 3fr 4fr 3fr;
-    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content min-content;
     justify-items: center;
     align-items: center;
     background-blend-mode: darken;
+    align-content: center;
+    gap: min(3rem, 6.1vh);
 }
 
 .center {
-    height: 40vh;
+    height: min(24.5rem, 44vh);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
     text-align: center;
     color: whitesmoke;
-    font-size: 2.5rem;
+    font-size: min(2.5rem, 5.2vh);
 }
 
 .temperature {
     white-space: nowrap;
     font-weight: 600;
-    font-size: 5rem;
+    font-size: min(5rem, 10.2vh);
 }
 
 input {
     background-color: transparent;
-    border: 2px solid whitesmoke;
-    border-radius: 5px;
-    height: 2rem;
-    width: 12.5rem;
+    border: min(2px, 0.31vh) solid whitesmoke;
+    border-radius: min(5px, 0.8vh);
+    height: min(2rem, 4.1vh);
+    width: min(12.5rem, 26vh);
     color: white;
-    font-size: 1.3rem;
+    font-size: min(1.3rem, 2.7vh);
     outline: 0;
-    padding-left: 2px;
-    padding-right: 1.9rem;
+    padding-left: min(2px, 0.31vh);
+    padding-right: min(1.9rem, 3.9vh);
 }
 
 .form {
@@ -59,189 +60,188 @@ input {
 
 .search {
     position: absolute;
-    right: 5px;
+    right: min(5px, 0.57vh);
     align-self: center;
+    height: min(1.5rem, 3.1vh);
 }
 
 .currentweather {
     display: flex;
-    gap: 2rem;
+    gap: min(2rem, 4.1vh);
 }
 
 .separator {
-    width: 3px;
     background-color: whitesmoke;
-    border: 2px solid whitesmoke;
+    border: min(2px, 0.41vh) solid whitesmoke;
     border-radius: 5px;
 }
 
 .top {
-    width: 90vw;
-    height: 10vh;
+    width: min(104rem, 170vh);
+    height: min(12.5rem, 21vh);
     display: flex;
     justify-content: space-evenly;
-    gap: 2.5rem;
+    gap: min(2.5rem, 4vh);
 }
 
 .topdiv {
-    width: 11vw;
     display: flex;
     align-items: center;
     box-sizing: content-box;
 }
 
 .topicons {
-    height: 3.5rem;
+    height: min(3.5rem, 5.7vh);
 }
 
 .topwrap {
-    font-size: 1.25rem;
+    font-size: min(1.25rem, 2.1vh);
     color: whitesmoke;
     font-weight: 600;
     text-align: center;
 }
 
 .topcontent {
-    font-size: 1.5rem;
+    font-size: min(1.5rem, 2.5vh);
 }
 
 .feelslike {
     position: relative;
-    width: 7.5vw;
+    width: 9.28rem;
 }
 
-.feelslike > * {
+/*.feelslike > * {
     position: absolute;
 }
 
 .feelslike > img {
-    left: -13px;
-}
+    left: min(-13px, -1.3vh);
+}*/
 
 .feelslike > .topwrap {
     right: 0;
 }
 
 .humidity {
-    gap: 1rem;
-    width: 8.5vw;
+    gap: min(1rem, 1.7vh);
+    width: 9.6rem;
 }
 
 .humidity > img {
-    height: 3.25rem;
+    height: min(3.25rem, 5.3vh);
     position: relative;
-    top: 2px;
+    top: min(2px, 0.2vh);
 }
 
 .sunrise {
-    gap: 1rem;
-    width: 8.9vw;
+    gap: min(1rem, 1.7vh);
+    width: 9.46rem;
 }
 
 .sunset {
-    gap: 1rem;
-    width: 8.65vw;
+    gap: min(1rem, 1.7vh);
+    width: 10.03rem;
 }
 
 .sunriseicon,
 .sunseticon {
     position: relative;
-    top: 4px;
+    top: min(4px, 0.5vh);
 }
 
 .windspeed {
-    gap: 1rem;
-    width: 10.2vw;
+    gap: min(1rem, 1.7vh);
+    width: 12.2rem;
 }
 
 .windspeed > img {
-    height: 3.6rem;
+    height: min(3.6rem, 5.9vh);
     position: relative;
-    top: 3px;
+    top: min(3px, 0.4vh);
 }
 
 .pop {
-    gap: 1rem;
+    gap: min(1rem, 1.7vh);
     width: 9rem;
 }
 
 .mintemperature {
-    gap: 1rem;
-    width: 8.5vw;
+    gap: min(1rem, 1.7vh);
+    width: 9.84rem;
 }
 
 .maxtemperature {
-    gap: 1rem;
-    width: 8.85vw;
+    gap: min(1rem, 1.7vh);
+    width: 10.2rem;
 }
 
 .bottom {
-    width: 90vw;
+    height: min(12.5rem, 21vh);
+    width: min(104rem, 170vh);
     display: grid;
-    gap: 1rem;
+    gap: min(1rem, 2.1vh);
 }
 
 .timechoice {
-    height: 5vh;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: min(1rem, 2.1vh);
 }
 
 .timechoice > * {
-    border: 2px solid white;
-    border-radius: 5px;
-    padding: 4px 15px;
-    font-size: 1.6rem;
+    border: min(2px, 0.31vh) solid white;
+    border-radius: min(5px, 1vh);
+    padding: min(4px, 0.4vh) min(15px, 1.6vh);
+    font-size: min(1.6rem, 2.7vh);
     background-color: rgb(0, 0, 0, 0.1);
     font-weight: 500;
     color: white;
 }
 
 .forecast {
-    height: 13.5vh;
+    height: min(8.3rem, 14vh);
     display: flex;
     justify-content: space-between;
     position: relative;
 }
 
 .dailydivs {
-    width: 11vw;
+    width: min(12.75rem, 21vh);
     font-weight: 600;
     color: white;
-    font-size: 1.75rem;
+    font-size: min(1.75rem, 2.8vh);
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
+    border-radius: min(5px, 1vh);
     display: grid;
     grid-template-rows: min-content 1fr;
 }
 
 .forecasticon {
-    width: 3.25rem;
+    width: min(3.25rem, 5.3vh);
 }
 
 .dailyweather {
     display: flex;
-    gap: 1rem;
+    gap: min(1rem, 2.1vh);
     justify-content: center;
     align-items: center;
 }
 
 .dailyweather > div {
     display: grid;
-    font-size: 1.6rem;
-    gap: 0.5rem;
+    font-size: min(1.6rem, 2.7vh);
+    gap: min(0.5rem, 1vh);
     position: relative;
-    bottom: 2px;
+    bottom: min(2px, 0.22vh);
 }
 
 .firsthourlydivs,
 .lasthourlydivs {
-    width: 6vw;
+    width: min(7rem, 12.6vh);
     font-weight: 600;
     color: white;
-    font-size: 1.75rem;
+    font-size: min(1.75rem, 3.2vh);
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 5px;
@@ -260,37 +260,42 @@ input {
 
 .rightarrow {
     position: absolute;
-    right: -4.25rem;
-    height: 5vh;
+    right: max(-4.25rem, -7.25vh);
+    height: min(3.1rem, 5.6vh);
     align-self: center;
 }
 
 .leftarrow {
     position: absolute;
-    left: -4.25rem;
-    height: 5vh;
+    left: max(-4.25rem, -7.25vh);
+    height: min(3.1rem, 5.6vh);
     align-self: center;
 }
 
 .hourlyicon {
-    height: 3rem;
+    height: min(3rem, 6.2vh);
 }
 
 .unit {
-    font-size: 1.25rem;
+    font-size: min(1.25rem, 2.6vh);
     font-weight: 500;
-    margin-top: -0.75rem;
+    margin-top: max(-0.75rem, -1.9vh);
     background-color: transparent;
     border: 0;
     color: white;
 }
 
 .error {
-    font-size: 1.5rem;
+    font-size: min(1.5rem, 3.1vh);
     font-weight: 500;
-    margin-bottom: -3.3rem;
+    margin-bottom: max(-3.3rem, -8.1vh);
 }
 
 .transparent {
     visibility: hidden;
+}
+
+.currenticon {
+    align-self: center;
+    height: min(5rem, 10.2vh);
 }
